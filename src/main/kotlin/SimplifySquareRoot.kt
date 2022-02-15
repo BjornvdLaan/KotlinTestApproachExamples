@@ -1,3 +1,4 @@
+
 /**
  * Square root with its coefficient.
  *
@@ -11,15 +12,23 @@
 data class SquareRoot(val coefficient: Int, val radicand: Int)
 
 /**
- * Simplifies the square root and makes randicand as small as possible.
+ * Simplifies the square root and makes radicand as small as possible.
  *
  * @param squareRoot the square root to simplify.
  * @return the simplified square root.
  */
 fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot =
     if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
+    //    else if (squareRoot.radicand * squareRoot.radicand < squareRoot.radicand)
+//        throw IllegalArgumentException("Radicand ^ 2 is bigger than max value of Integer")
     else (2..squareRoot.radicand)
-        .filter { squareRoot.radicand % (it * it) == 0 }
-        .fold(SquareRoot(squareRoot.coefficient, squareRoot.radicand)) { acc, i ->
-            SquareRoot(acc.coefficient * i, acc.radicand / (i * i))
+        .fold(squareRoot) { simplifiedSquareRoot, i ->
+            if (simplifiedSquareRoot.radicand % (i * i) == 0) {
+                SquareRoot(
+                    simplifiedSquareRoot.coefficient * i,
+                    simplifiedSquareRoot.radicand / (i * i)
+                )
+            } else {
+                simplifiedSquareRoot
+            }
         }
