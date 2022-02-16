@@ -1,2 +1,2 @@
-# KotlinTestApproachExamples
-This repository contains code that I wrote for a blog article. Work in progress.
+# Kotlin Kotest testing examples
+This repository contains code for experimenting with example-based, data-driven and property-based testing using kotest. Work in progress.
