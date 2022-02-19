@@ -9,12 +9,14 @@ class SimplifySquareRootDynamicTest : FunSpec({
     context("Simplication of square roots") {
         val exampleCoefficients = listOf(2, 3, 6, 10, 11, 14)
         val exampleRandicands = listOf(1, 2, 3, 6, 10, 11, 14)
-        val examples = (exampleCoefficients zip exampleRandicands).map { SquareRoot(it.first, it.second) }
+        val examples = (exampleCoefficients zip exampleRandicands)
+            .map { SquareRoot(it.first, it.second) }
 
         examples.forEach { originalSquareRoot ->
             run {
                 test(
-                    "Simplified square root should be equal to ${originalSquareRoot.coefficient} sqrt(${originalSquareRoot.radicand})"
+                    """Simplified square root should be equal to 
+                        ${originalSquareRoot.coefficient} sqrt(${originalSquareRoot.radicand})"""
                 ) {
                     val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
 

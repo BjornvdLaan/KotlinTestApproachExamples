@@ -17,10 +17,8 @@ data class SquareRoot(val coefficient: Int, val radicand: Int)
  * @param squareRoot the square root to simplify.
  * @return the simplified square root.
  */
-fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot =
+fun simplifySquareRootFold(squareRoot: SquareRoot): SquareRoot =
     if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
-    //    else if (squareRoot.radicand * squareRoot.radicand < squareRoot.radicand)
-//        throw IllegalArgumentException("Radicand ^ 2 is bigger than max value of Integer")
     else (2..squareRoot.radicand)
         .fold(squareRoot) { simplifiedSquareRoot, i ->
             if (simplifiedSquareRoot.radicand % (i * i) == 0) {
@@ -32,3 +30,30 @@ fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot =
                 simplifiedSquareRoot
             }
         }
+
+/**
+ * Simplifies the square root and makes radicand as small as possible.
+ *
+ * @param squareRoot the square root to simplify.
+ * @return the simplified square root.
+ */
+fun simplifySquareRootImp(squareRoot: SquareRoot): SquareRoot =
+    if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
+    else {
+        var simplifiedSquareRoot = squareRoot
+
+        for (i in 2..squareRoot.radicand) {
+            if (simplifiedSquareRoot.radicand % (i * i) == 0) {
+                simplifiedSquareRoot =
+                    SquareRoot(
+                        coefficient = simplifiedSquareRoot.coefficient * i,
+                        radicand = simplifiedSquareRoot.radicand / (i * i)
+                    )
+            }
+        }
+
+        simplifiedSquareRoot
+    }
+
+// Makes it easy to choose one of the implementations above for testing
+fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot = simplifySquareRootFold(squareRoot)

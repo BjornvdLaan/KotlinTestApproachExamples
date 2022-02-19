@@ -32,7 +32,9 @@ class SimplifySquareRootPropertyBasedTest : FunSpec({
                     val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
 
                     (simplifiedSquareRoot.coefficient.pow(2).multiply(simplifiedSquareRoot.radicand))
-                        .shouldBe((originalSquareRoot.coefficient.pow(2).multiply(originalSquareRoot.radicand)))
+                        .shouldBe(
+                            originalSquareRoot.coefficient.pow(2).multiply(originalSquareRoot.radicand)
+                        )
                 }
             }
         }
