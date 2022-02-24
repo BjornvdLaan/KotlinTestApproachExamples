@@ -24,8 +24,6 @@ class FSimplifySquareRootBigIntPropertyBasedTest : FunSpec({
                 run {
                     val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
 
-                    println("$originalSquareRoot - $simplifiedSquareRoot")
-
                     (simplifiedSquareRoot.coefficient.pow(2).multiply(simplifiedSquareRoot.radicand))
                         .shouldBe(
                             originalSquareRoot.coefficient.pow(2).multiply(originalSquareRoot.radicand)
