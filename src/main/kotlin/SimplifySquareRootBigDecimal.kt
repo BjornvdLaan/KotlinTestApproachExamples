@@ -22,14 +22,30 @@ data class SquareRootBI(val coefficient: BigInteger, val radicand: BigInteger)
 fun simplifySquareRoot(squareRoot: SquareRootBI): SquareRootBI =
     if (squareRoot.radicand < BigInteger.ZERO) throw IllegalArgumentException("Randicand cannot be negative")
     else if (squareRoot.radicand == BigInteger.ZERO) SquareRootBI(BigInteger.ZERO, BigInteger.ZERO)
-    else (squareRoot.radicand.intValueExact()..2)
-        .fold(squareRoot) { simplifiedSquareRoot, i ->
-            if (simplifiedSquareRoot.radicand.toInt() % (i * i) == 0) {
-                SquareRootBI(
-                    simplifiedSquareRoot.coefficient.times(i.toBigInteger()),
-                    simplifiedSquareRoot.radicand.div(i.toBigInteger().pow(2))
-                )
-            } else {
-                simplifiedSquareRoot
+    else if (squareRoot.radicand == BigInteger.ONE) SquareRootBI(squareRoot.coefficient, BigInteger.ONE)
+    else {
+        val decreasingSequence = sequence {
+            // We can start at sqrt(radicand) because radicand is
+            // never divisible without remainder by anything greater than i = sqrt(radicand)
+            // This optimization is applied because tests are otherwise very very slow.
+            var bi = squareRoot.radicand.sqrt()
+            while (bi > BigInteger.ONE) {
+                yield(bi)
+                bi = bi.subtract(BigInteger.ONE)
             }
         }
+
+        decreasingSequence
+            .fold(squareRoot) { simplifiedSquareRoot, i ->
+                run {
+                    if (simplifiedSquareRoot.radicand.mod(i.pow(2)) == BigInteger.ZERO) {
+                        SquareRootBI(
+                            simplifiedSquareRoot.coefficient.times(i),
+                            simplifiedSquareRoot.radicand.div(i.pow(2))
+                        )
+                    } else {
+                        simplifiedSquareRoot
+                    }
+                }
+            }
+    }

@@ -1,4 +1,3 @@
-
 /**
  * Square root with its coefficient.
  *
@@ -11,25 +10,6 @@
  */
 data class SquareRoot(val coefficient: Int, val radicand: Int)
 
-/**
- * Simplifies the square root and makes radicand as small as possible.
- *
- * @param squareRoot the square root to simplify.
- * @return the simplified square root.
- */
-fun simplifySquareRootFold(squareRoot: SquareRoot): SquareRoot =
-    if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
-    else (2..squareRoot.radicand)
-        .fold(squareRoot) { simplifiedSquareRoot, i ->
-            if (simplifiedSquareRoot.radicand % (i * i) == 0) {
-                SquareRoot(
-                    simplifiedSquareRoot.coefficient * i,
-                    simplifiedSquareRoot.radicand / (i * i)
-                )
-            } else {
-                simplifiedSquareRoot
-            }
-        }
 
 /**
  * Simplifies the square root and makes radicand as small as possible.
@@ -37,12 +17,21 @@ fun simplifySquareRootFold(squareRoot: SquareRoot): SquareRoot =
  * @param squareRoot the square root to simplify.
  * @return the simplified square root.
  */
-fun simplifySquareRootImp(squareRoot: SquareRoot): SquareRoot =
+fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot =
     if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
+    else if (squareRoot.radicand == 0) SquareRoot(0, 0)
+    else if (squareRoot.radicand == 1) SquareRoot(squareRoot.coefficient, 1)
     else {
         var simplifiedSquareRoot = squareRoot
 
-        for (i in 2..squareRoot.radicand) {
+        for (i in squareRoot.radicand downTo 2) {
+//            //Uncomment this IF statement if you want to trigger shrinking when (i * i) == 0
+//            //When commented, the scenario will throw ArithmeticException and that does not trigger shrinking
+//            if ((i * i) == 0) {
+//                simplifiedSquareRoot = SquareRoot(0, 0)
+//                break
+//            }
+
             if (simplifiedSquareRoot.radicand % (i * i) == 0) {
                 simplifiedSquareRoot =
                     SquareRoot(
@@ -54,6 +43,3 @@ fun simplifySquareRootImp(squareRoot: SquareRoot): SquareRoot =
 
         simplifiedSquareRoot
     }
-
-// Makes it easy to choose one of the implementations above for testing
-fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot = simplifySquareRootFold(squareRoot)

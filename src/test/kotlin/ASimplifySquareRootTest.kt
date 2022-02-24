@@ -5,12 +5,12 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 
 
-class SimplifySquareRootTest : FunSpec({
-    context("Simplication of square roots") {
+class ASimplifySquareRootTest : FunSpec({
+    context("Simplification of square roots") {
         test(
             "Simplified square root should be equal to original square root"
         ) {
-            val originalSquareRoot = SquareRoot(1, 4)
+            val originalSquareRoot = SquareRoot(1, 5)
             val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
 
             (simplifiedSquareRoot.coefficient sqrt simplifiedSquareRoot.radicand)
@@ -20,23 +20,11 @@ class SimplifySquareRootTest : FunSpec({
         test(
             "Simplified square root should be equal to original square root with coefficient"
         ) {
-            val originalSquareRoot = SquareRoot(3, 4)
+            val originalSquareRoot = SquareRoot(3, 5)
             val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
 
             (simplifiedSquareRoot.coefficient sqrt simplifiedSquareRoot.radicand)
                 .shouldBe(originalSquareRoot.coefficient sqrt originalSquareRoot.radicand)
-        }
-
-        test(
-            "Simplified square root cannot be simplified further"
-        ) {
-            val originalSquareRoot = SquareRoot(1, 4)
-            val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
-            val twiceSimplifiedSquareRoot =
-                simplifySquareRoot(simplifiedSquareRoot)
-
-            simplifiedSquareRoot.coefficient shouldBe twiceSimplifiedSquareRoot.coefficient
-            simplifiedSquareRoot.radicand shouldBe twiceSimplifiedSquareRoot.radicand
         }
 
         test("Randicand cannot be negative") {

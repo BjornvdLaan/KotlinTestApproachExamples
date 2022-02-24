@@ -10,19 +10,12 @@ import io.kotest.property.arbitrary.negativeInt
 import io.kotest.property.arbitrary.nonNegativeInt
 import io.kotest.property.checkAll
 
-class SimplifySquareRootPropertyBasedTest : FunSpec({
-    context("Simplication of square roots") {
+class FSimplifySquareRootBigIntPropertyBasedTest : FunSpec({
+    context("Simplification of square roots") {
         val squareRootArb = arbitrary {
             SquareRootBI(
-                coefficient = Arb.int().bind().toBigInteger(),
+                coefficient = Arb.nonNegativeInt().bind().toBigInteger(),
                 radicand = Arb.nonNegativeInt().bind().toBigInteger()
-            )
-        }
-
-        val negativeSquareRootArb = arbitrary {
-            SquareRootBI(
-                coefficient = Arb.int().bind().toBigInteger(),
-                radicand = Arb.negativeInt().bind().toBigInteger()
             )
         }
 
@@ -30,6 +23,8 @@ class SimplifySquareRootPropertyBasedTest : FunSpec({
             squareRootArb.checkAll { originalSquareRoot ->
                 run {
                     val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
+
+                    println("$originalSquareRoot - $simplifiedSquareRoot")
 
                     (simplifiedSquareRoot.coefficient.pow(2).multiply(simplifiedSquareRoot.radicand))
                         .shouldBe(
@@ -49,6 +44,13 @@ class SimplifySquareRootPropertyBasedTest : FunSpec({
                 simplifiedSquareRoot.radicand shouldBe twiceSimplifiedSquareRoot.radicand
 
             }
+        }
+
+        val negativeSquareRootArb = arbitrary {
+            SquareRootBI(
+                coefficient = Arb.int().bind().toBigInteger(),
+                radicand = Arb.negativeInt().bind().toBigInteger()
+            )
         }
 
         context("Randicand cannot be negative") {

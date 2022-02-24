@@ -5,8 +5,8 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 
-class SimplifySquareRootDataDrivenTest : FunSpec({
-    context("Simplication of square roots") {
+class CSimplifySquareRootDataDrivenTest : FunSpec({
+    context("Simplification of square roots") {
         val exampleCoefficients = listOf(2, 3, 6, 10, 11, 14)
         val exampleRandicands = listOf(2, 3, 6, 10, 11, 14)
 

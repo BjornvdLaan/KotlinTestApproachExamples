@@ -5,8 +5,8 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 
 
-class SimplifySquareRootDynamicTest : FunSpec({
-    context("Simplication of square roots") {
+class BSimplifySquareRootDynamicTest : FunSpec({
+    context("Simplification of square roots") {
         val exampleCoefficients = listOf(2, 3, 6, 10, 11, 14)
         val exampleRandicands = listOf(1, 2, 3, 6, 10, 11, 14)
         val examples = (exampleCoefficients zip exampleRandicands)
