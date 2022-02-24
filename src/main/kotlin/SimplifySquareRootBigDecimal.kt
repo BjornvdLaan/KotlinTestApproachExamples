@@ -13,14 +13,14 @@ import java.math.BigInteger
 data class SquareRootBI(val coefficient: BigInteger, val radicand: BigInteger)
 
 /**
- * Simplifies the square root and makes randicand as small as possible.
+ * Simplifies the square root and makes radicand as small as possible.
  *
  *
  * @param squareRoot the square root to simplify.
  * @return the simplified square root.
  */
 fun simplifySquareRoot(squareRoot: SquareRootBI): SquareRootBI =
-    if (squareRoot.radicand < BigInteger.ZERO) throw IllegalArgumentException("Randicand cannot be negative")
+    if (squareRoot.radicand < BigInteger.ZERO) throw IllegalArgumentException("Radicand cannot be negative")
     else if (squareRoot.radicand == BigInteger.ZERO) SquareRootBI(BigInteger.ZERO, BigInteger.ZERO)
     else if (squareRoot.radicand == BigInteger.ONE) SquareRootBI(squareRoot.coefficient, BigInteger.ONE)
     else {

@@ -18,7 +18,7 @@ data class SquareRoot(val coefficient: Int, val radicand: Int)
  * @return the simplified square root.
  */
 fun simplifySquareRoot(squareRoot: SquareRoot): SquareRoot =
-    if (squareRoot.radicand < 0) throw IllegalArgumentException("Randicand cannot be negative")
+    if (squareRoot.radicand < 0) throw IllegalArgumentException("Radicand cannot be negative")
     else if (squareRoot.radicand == 0) SquareRoot(0, 0)
     else if (squareRoot.radicand == 1) SquareRoot(squareRoot.coefficient, 1)
     else {

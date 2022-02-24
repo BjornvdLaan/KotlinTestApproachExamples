@@ -27,12 +27,12 @@ class ASimplifySquareRootTest : FunSpec({
                 .shouldBe(originalSquareRoot.coefficient sqrt originalSquareRoot.radicand)
         }
 
-        test("Randicand cannot be negative") {
+        test("Radicand cannot be negative") {
             val negativeSquareRoot = SquareRoot(1, -4)
             val exception = shouldThrow<IllegalArgumentException> {
                 simplifySquareRoot(negativeSquareRoot)
             }
-            exception.message should startWith("Randicand cannot be negative")
+            exception.message should startWith("Radicand cannot be negative")
         }
     }
 })

@@ -75,13 +75,13 @@ class DSimplifySquareRootPropertyBasedTest : FunSpec({
             )
         }
 
-        context("Randicand cannot be negative") {
+        context("Radicand cannot be negative") {
             negativeSquareRootArb.checkAll { squareRoot ->
                 run {
                     val exception = shouldThrow<IllegalArgumentException> {
                         simplifySquareRoot(squareRoot)
                     }
-                    exception.message should startWith("Randicand cannot be negative")
+                    exception.message should startWith("Radicand cannot be negative")
                 }
             }
         }

@@ -8,8 +8,8 @@ import io.kotest.matchers.string.startWith
 class BSimplifySquareRootDynamicTest : FunSpec({
     context("Simplification of square roots") {
         val exampleCoefficients = listOf(2, 3, 6, 10, 11, 14)
-        val exampleRandicands = listOf(1, 2, 3, 6, 10, 11, 14)
-        val examples = (exampleCoefficients zip exampleRandicands)
+        val exampleRadicands = listOf(1, 2, 3, 6, 10, 11, 14)
+        val examples = (exampleCoefficients zip exampleRadicands)
             .map { SquareRoot(it.first, it.second) }
 
         examples.forEach { originalSquareRoot ->
@@ -35,14 +35,14 @@ class BSimplifySquareRootDynamicTest : FunSpec({
                     simplifiedSquareRoot.radicand shouldBe twiceSimplifiedSquareRoot.radicand
                 }
 
-                test("Randicand cannot be negative") {
+                test("Radicand cannot be negative") {
                     run {
                         val negativeSquareRoot = originalSquareRoot
                             .copy(radicand = -1 * originalSquareRoot.radicand)
                         val exception = shouldThrow<IllegalArgumentException> {
                             simplifySquareRoot(negativeSquareRoot)
                         }
-                        exception.message should startWith("Randicand cannot be negative")
+                        exception.message should startWith("Radicand cannot be negative")
                     }
                 }
             }

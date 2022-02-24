@@ -8,10 +8,10 @@ import io.kotest.matchers.string.startWith
 class CSimplifySquareRootDataDrivenTest : FunSpec({
     context("Simplification of square roots") {
         val exampleCoefficients = listOf(2, 3, 6, 10, 11, 14)
-        val exampleRandicands = listOf(2, 3, 6, 10, 11, 14)
+        val exampleRadicands = listOf(2, 3, 6, 10, 11, 14)
 
-        val squareRoots = exampleRandicands.map { SquareRoot(1, it) }
-        val squareRootsWithCoefficients = (exampleCoefficients zip exampleRandicands)
+        val squareRoots = exampleRadicands.map { SquareRoot(1, it) }
+        val squareRootsWithCoefficients = (exampleCoefficients zip exampleRadicands)
             .map { SquareRoot(it.first, it.second) }
         val examples = squareRoots + squareRootsWithCoefficients
 
@@ -38,7 +38,7 @@ class CSimplifySquareRootDataDrivenTest : FunSpec({
             }
         }
 
-        context("Randicand cannot be negative") {
+        context("Radicand cannot be negative") {
             withData(
                 examples.map { SquareRoot(it.coefficient, -1 * it.radicand) }
             ) { originalSquareRoot ->
@@ -46,7 +46,7 @@ class CSimplifySquareRootDataDrivenTest : FunSpec({
                     val exception = shouldThrow<IllegalArgumentException> {
                         simplifySquareRoot(originalSquareRoot)
                     }
-                    exception.message should startWith("Randicand cannot be negative")
+                    exception.message should startWith("Radicand cannot be negative")
                 }
             }
         }
