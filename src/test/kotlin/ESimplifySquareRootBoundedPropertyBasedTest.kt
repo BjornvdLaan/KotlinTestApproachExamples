@@ -6,7 +6,7 @@ import io.kotest.property.arbitrary.positiveInt
 import io.kotest.property.checkAll
 
 /**
- * NOTE: Part of these tests fail for exemplary purposes.
+ * NOTE: Part of these tests FAIL for exemplary purposes.
  */
 class ESimplifySquareRootBoundedPropertyBasedTest : FunSpec({
     context("Simplification of square roots") {

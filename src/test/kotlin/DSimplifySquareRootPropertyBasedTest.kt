@@ -11,7 +11,7 @@ import io.kotest.property.arbitrary.positiveInt
 import io.kotest.property.checkAll
 
 /**
- * NOTE: Part of these tests fail for exemplary purposes.
+ * NOTE: Part of these tests FAIL for exemplary purposes.
  */
 class DSimplifySquareRootPropertyBasedTest : FunSpec({
     context("Simplification of square roots") {
@@ -45,7 +45,7 @@ class DSimplifySquareRootPropertyBasedTest : FunSpec({
         }
 
         context("Simplified square root should be equal to original square root (simple arb, without division)") {
-            Arb.positiveInt().checkAll { radicand ->
+            Arb.positiveInt(35500).checkAll { radicand ->
                 run {
                     val originalSquareRoot = SquareRoot(1, radicand)
                     val simplifiedSquareRoot = simplifySquareRoot(originalSquareRoot)
